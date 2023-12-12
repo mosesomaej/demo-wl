@@ -11,9 +11,9 @@ phases:
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       - echo "phase complete!"
 
-#   build:
-#     commands:
-#       - echo "Building the Docker image..."
+  build:
+    commands:
+      - echo "Building the Docker image..."
 #       - docker build -t $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION .
 #       - echo "Tagging the Docker image..."
 #       - docker tag $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION $REPO_URI:latest
