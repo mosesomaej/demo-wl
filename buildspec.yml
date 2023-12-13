@@ -8,7 +8,7 @@ phases:
       # - $(aws ecr get-login-password --no-include-email --region $AWS_DEFAULT_REGION)
       - echo "done"
       - REPO_NAME=$(aws ecr describe-repositories --repository-names $ECR_REPOSITORY_NAME_PARAMETER --query 'repositories[0].repositoryName' --output text)
-      - echo "ECR Repository Name: $REPO_NAME"
+      - echo "$REPO_NAME"
       # - REPO_URI=$(aws ecr describe-repositories --repository-names $REPO_NAME --query 'repositories[0].repositoryUri' --output text)
      
       
