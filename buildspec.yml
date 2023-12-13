@@ -9,7 +9,7 @@ phases:
       - echo "done"
       - REPO_NAME=$(aws ecr describe-repositories --repository-names demo-wl-repo --query 'repositories[0].repositoryName' --output text)
       - echo "$REPO_NAME"
-      # - REPO_URI=$(aws ecr describe-repositories --repository-names $REPO_NAME --query 'repositories[0].repositoryUri' --output text)
+      - REPO_URI=$(aws ecr describe-repositories --repository-names $REPO_NAME --query 'repositories[0].repositoryUri' --output text)
      
       
       # - echo "ECR Repository URI: $REPO_URI"
