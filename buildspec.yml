@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "starting pre-build"
+      - echo "starting pre-build!"
       - aws --version
       # - $(aws ecr get-login-password --no-include-email --region $AWS_DEFAULT_REGION)
       - echo "done"
