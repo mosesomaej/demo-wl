@@ -7,30 +7,25 @@ phases:
       - aws --version
       - docker --version
       - docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 312516337500.dkr.ecr.us-east-1.amazonaws.com
-      # - $(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 312516337500.dkr.ecr.us-east-1.amazonaws.com)
-      - echo "done"
       - REPO_NAME=$(aws ecr describe-repositories --repository-names demo-wl-repo --query 'repositories[0].repositoryName' --output text)
-      - echo "$REPO_NAME"
       - REPO_URI=$(aws ecr describe-repositories --repository-names $REPO_NAME --query 'repositories[0].repositoryUri' --output text)
-      - echo "$REPO_URI"
-      # - echo "Logging in to Amazon ECR..."
-      - echo "pre_build phase complete!!"
+      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print substr($2, length($2)-3)}')
 
   build:
     commands:
       - echo "Building the Docker image..."
-      - docker build -t $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION .
+      - docker build -t $REPO_NAME:$IMAGE_TAG:latest .
       - echo "Tagging the Docker image..."
-      - docker tag $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION $REPO_URI:latest
+      - docker tag $REPO_NAME:$IMAGE_TAG:latest 312516337500.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:$IMAGE_TAG
       - echo "build phase complete!"
 
-  post_build:
-    commands:
-      - echo "Pushing the Docker image to Amazon ECR..."
-      - docker push $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
-      - docker push $REPO_URI:latest
-      - echo "Writing image definitions file..."
-      - printf '[{"name":"%s","imageUri":"%s"}]' $REPO_NAME $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION > imagedefinitions.json
+#   post_build:
+#     commands:
+#       - echo "Pushing the Docker image to Amazon ECR..."
+#       - docker push $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
+#       - docker push $REPO_URI:latest
+#       - echo "Writing image definitions file..."
+#       - printf '[{"name":"%s","imageUri":"%s"}]' $REPO_NAME $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION > imagedefinitions.json
 
 # artifacts:
 #   files: imagedefinitions.json
