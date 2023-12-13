@@ -16,12 +16,13 @@ phases:
       # - echo "Logging in to Amazon ECR..."
       - echo "pre_build phase complete!!"
 
-  # build:
-  #   commands:
-  #     - echo "Building the Docker image..."
-#       - docker build -t $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION .
-#       - echo "Tagging the Docker image..."
-#       - docker tag $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION $REPO_URI:latest
+  build:
+    commands:
+      - echo "Building the Docker image..."
+      - docker build -t $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION .
+      - echo "Tagging the Docker image..."
+      - docker tag $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION $REPO_URI:latest
+      - echo "build phase complete!"
 
 #   post_build:
 #     commands:
