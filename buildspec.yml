@@ -5,7 +5,7 @@ phases:
     commands:
       - echo "starting pre-build!"
       - aws --version
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - $(aws ecr get-login-password --no-include-email --region $AWS_DEFAULT_REGION)
       - echo "done"
       - REPO_NAME=$(aws ecr describe-repositories --repository-names demo-wl-repo --query 'repositories[0].repositoryName' --output text)
       - echo "$REPO_NAME"
