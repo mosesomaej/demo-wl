@@ -23,7 +23,7 @@ phases:
     commands:
       - echo "Pushing the Docker image to Amazon ECR..."
       - docker push 312516337500.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:$IMAGE_TAG
-      # - docker push $REPO_URI:latest
+      - docker push 312516337500.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:latest
       - echo "Writing image definitions file..."
       - printf '[{"name":"%s","imageUri":"%s"}]' $REPO_NAME $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION > imagedefinitions.json
 
