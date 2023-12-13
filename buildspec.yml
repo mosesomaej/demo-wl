@@ -17,6 +17,7 @@ phases:
       - docker build -t $REPO_NAME-$IMAGE_TAG:latest .
       - echo "Tagging the Docker image..."
       - docker tag $REPO_NAME-$IMAGE_TAG:latest 312516337500.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:$IMAGE_TAG
+      - docker tag $REPO_NAME-$IMAGE_TAG:latest 312516337500.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:latest
       - echo "build phase complete!"
 
   post_build:
