@@ -4,13 +4,13 @@ phases:
   pre_build:
     commands:
       - echo "starting pre-build"
-      - REPO_NAME=$(aws ecr describe-repositories --repository-names $ECR_REPOSITORY_NAME_PARAMETER --query 'repositories[0].repositoryName' --output text)
-      - REPO_URI=$(aws ecr describe-repositories --repository-names $REPO_NAME --query 'repositories[0].repositoryUri' --output text)
-      - echo "ECR Repository Name: $REPO_NAME"
-      - echo "ECR Repository URI: $REPO_URI"
-      - echo "Logging in to Amazon ECR..."
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - echo "phase complete!!"
+      # - REPO_NAME=$(aws ecr describe-repositories --repository-names $ECR_REPOSITORY_NAME_PARAMETER --query 'repositories[0].repositoryName' --output text)
+      # - REPO_URI=$(aws ecr describe-repositories --repository-names $REPO_NAME --query 'repositories[0].repositoryUri' --output text)
+      # - echo "ECR Repository Name: $REPO_NAME"
+      # - echo "ECR Repository URI: $REPO_URI"
+      # - echo "Logging in to Amazon ECR..."
+      # - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      # - echo "phase complete!!"
 
   # build:
   #   commands:
